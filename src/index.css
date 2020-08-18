@@ -5,9 +5,61 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.layout {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(1,1,1,0.44);
+  z-index: 1;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.modal {
+  display: none;
+  background: #fff;
+  position: fixed;
+  width: 200px;
+  height: 100px;
+  left: 40%;
+  top: 10%;
+  padding: 10px;
+  z-index: 2;
+}
+.modal.show,
+.layout.show {
+  display: block;
+}
+.modal-title {
+  color: #222;
+  font-size: 12px;
+  text-align: center;
+}
+.modal-actions {
+  font-size: 0;
+  text-align: center;
+}
+.btn {
+  display: inline-block;
+  box-shadow: none;
+  border: none;
+  border-radius: 2px;
+  padding: 3px 5px;
+  color: #111;
+  min-width: 50px;
+}
+.btn.success {
+  background: aquamarine;
+  margin: 0 4%;
+}
+.btn.decline {
+  background: hotpink;
 }

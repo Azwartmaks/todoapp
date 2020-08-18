@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Task from "./task";
+import Modal from "./modal";
 
 class TasksList extends Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class TasksList extends Component {
                 { title: 'training', completed: false, },
                 { title: 'family time', completed: false, },
                 { title: 'sleep', completed: false, },
-            ]
+            ],
+            taskIdMemory: '',
+            showModal: false,
         };
         this.inputChangeHandle = this.inputChangeHandle.bind(this);
         this.addNewTask = this.addNewTask.bind(this);
@@ -25,7 +28,9 @@ class TasksList extends Component {
         tasks[index].completed = true;
 
         this.setState({
-            tasks
+            tasks,
+            showModal: false,
+            taskIdMemory: '',
         });
     }
 
@@ -47,15 +52,31 @@ class TasksList extends Component {
         })
     }
 
+    openModal(i) {
+        this.setState({
+            showModal: true,
+            taskIdMemory: i,
+        });
+    }
+
+    eventDecline() {
+        this.setState({
+            showModal: false,
+            taskIdMemory: '',
+        });
+    }
+
     render() {
-        const {tasks, newTask} = this.state;
+        const {tasks, newTask, showModal, taskIdMemory} = this.state;
         const taskList = tasks.map((task, i) => (
-            <Task key={i} taskTitle={task.title} doneClick={() => this.eventDone(i)} completed={task.completed}/>
+            <Task key={i} taskTitle={task.title} openModal={() => this.openModal(i)} completed={task.completed}/>
         ));
         return (
             <div>
+                <Modal successClick={() => this.eventDone(taskIdMemory)} declineClick={() => this.eventDecline()} show={showModal}/>
                 <input onChange={this.inputChangeHandle} value={newTask}/>
-                <a href='#' onClick={this.addNewTask}>Добавить новый</a>
+                <br/>
+                <a href='#' onClick={this.addNewTask} className="btn success">Add New pls</a>
                 {taskList}
             </div>
         )

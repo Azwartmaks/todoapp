@@ -4,5 +4,5 @@ export default function Task(props) {
     if (props.completed) {
         return false;
     }
-    return (<div> {props.taskTitle} <a href="#" onClick={props.doneClick}>Done</a> </div>)
+    return (<div> {props.taskTitle} <a href="#" onClick={props.openModal}>Done</a> </div>)
 }
